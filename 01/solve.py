@@ -22,8 +22,9 @@ def solve_part_1():
 	inpList = utils.read_file_into_list_of_ints(fn)
 	#~ print(inpList)
 	
-	ni = number_of_increases(inpList)
-	print(ni)
+	answer = number_of_increases(inpList)
+	
+	print("Answer1 =", answer)
 	
 def sliding_window_sum(inpList, windowWidth = 3):
 	inpList2 = [];
@@ -40,8 +41,9 @@ def solve_part_2():
 	inpList2 = sliding_window_sum(inpList, 3)
 	#~ print(inpList2)
 	
-	ni = number_of_increases(inpList2)
-	print(ni)
+	answer = number_of_increases(inpList2)
+	
+	print("Answer2 =", answer)
 
 def main(args):
 		

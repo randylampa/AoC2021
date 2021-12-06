@@ -11,13 +11,20 @@ def solve_part_1():
 	fn = 'input' if False else 'input-demo'
 	inpList = utils.read_file_into_list(fn)
 	print(inpList)
+
 	print('Part 1 not solved yet')
-	pass
+	
+	answer = None
+	
+	print("Answer1 =", answer)
 
 def solve_part_2():
 	print('Part 2 not solved yet')
-	pass
 	
+	answer = None
+	
+	print("Answer2 =", answer)
+
 def main(args):
 	
 	solve_part_1()
