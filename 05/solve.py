@@ -76,13 +76,13 @@ def bpoint2str(v):
 	return '.' if v==0 else str(v)
 
 def dump_board2d(board:list):
-	for line in board:
-		print(''.join(map(bpoint2str, line)));
+	for row in board:
+		print(''.join(map(bpoint2str, row)));
 
 def board2d_to_file(fn:str, board:list):
 	f = open(fn, 'w')
-	for line in board:
-		f.writelines(''.join(map(bpoint2str, line))+'\n');
+	for row in board:
+		f.writelines(''.join(map(bpoint2str, row))+'\n');
 	f.close()
 
 def lines_to_board2d(lines:list, board:list):
@@ -91,7 +91,7 @@ def lines_to_board2d(lines:list, board:list):
 		pTo = line[1]
 		isHorz = pFrom[1] == pTo[1]
 		isVert = pFrom[0] == pTo[0]
-		print(line, isHorz, isVert)
+		#~ print(line, isHorz, isVert)
 		if isHorz:
 			y = pFrom[1]
 			xx = [pFrom[0], pTo[0]]
@@ -111,8 +111,16 @@ def lines_to_board2d(lines:list, board:list):
 			pass
 	pass
 
+def count_crossings(board:list, cross_trigger:int):
+	crossings = 0
+	for row in board:
+		for point in row:
+			if point>=cross_trigger:
+				crossings+=1
+	return crossings
+
 def solve_part_1():
-	fn = 'input' if False else 'input-demo'
+	fn = 'input' if True else 'input-demo'
 	#~ list_of_lines = read_file_into_list_of_lines(fn)
 	#~ print(list_of_lines, 'list_of_lines')
 	list_of_lines = read_file_into_list_of_lines__golf(fn)
@@ -139,7 +147,7 @@ def solve_part_1():
 		dump_board2d(board)
 		board2d_to_file('output-'+fn, board)
 	
-	answer = None
+	answer = count_crossings(board, 2)
 	
 	print("Answer1 =", answer)
 
