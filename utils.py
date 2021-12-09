@@ -6,11 +6,12 @@
 import sys
 
 def get_input_file(demo, issue:int=None):
-	print(issue)
-	s = ''
-	if issue is not None:
-		s = str(issue).rjust(2,'0')
+	s = str(issue).rjust(2,'0') if issue is not None else ''
 	return ('input{}' if not demo else 'input{}-demo').format(s)
+
+def get_output_file(demo, issue:int=None):
+	s = str(issue).rjust(2,'0') if issue is not None else ''
+	return ('output{}' if not demo else 'output{}-demo').format(s)
 
 def read_file_into_list(name='input', mapfnc = lambda x:x.strip()):
 	"""
