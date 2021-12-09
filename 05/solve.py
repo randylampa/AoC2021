@@ -85,7 +85,7 @@ def board2d_to_file(fn:str, board:list):
 		f.writelines(''.join(map(bpoint2str, row))+'\n');
 	f.close()
 
-def lines_to_board2d(lines:list, board:list):
+def lines_to_board2d(lines:list, board:list, process_diagonals:bool=False):
 	for line in lines:
 		pFrom = line[0]
 		pTo = line[1]
@@ -106,6 +106,26 @@ def lines_to_board2d(lines:list, board:list):
 			for y in range(yy[0], yy[1]+1):
 				#~ print('ver',(x,y))
 				board[y][x]+=1
+		elif process_diagonals:
+			# only 45deg
+			xx = [pFrom[0], pTo[0]]
+			difX = xx[1]-xx[0]
+			lengthX = abs(difX)
+			xInv = int(difX/lengthX)
+			
+			yy = [pFrom[1], pTo[1]]
+			difY = yy[1]-yy[0]
+			lengthY = abs(difY)
+			yInv = int(difY/lengthY)
+			#~ print('diag', line, xInv, yInv)
+			if lengthX == lengthY:
+				#~ print('is 45deg')
+				for i in range(lengthX+1):
+					x = pFrom[0]+i*xInv
+					y = pFrom[1]+i*yInv
+					board[y][x]+=1
+			else:
+				print('Sorry, cannot process non-45deg line {}'.format(line))
 		else:
 			#~ print('line {} is neither H nor V'.format(line))
 			pass
@@ -152,17 +172,40 @@ def solve_part_1():
 	print("Answer1 =", answer)
 
 def solve_part_2():
-	print('Part 2 not solved yet')
+	fn = 'input' if True else 'input-demo'
+	list_of_lines = read_file_into_list_of_lines__golf(fn)
+	#~ print(list_of_lines, 'list_of_lines G')
 	
-	answer = None
+	dims = get_max_dimensions(list_of_lines)
+	print(dims)
+
+	if len(dims)>2:
+		print('ERROR - cannot operate with these dimmensions {}'.format(dims))
+		return
+	board = initialize_board2d(dims)
+	#~ print(board)
+
+	#~ dump_board2d(board)
+	#~ board2d_to_file('output2-'+fn, board)
+
+	lines_to_board2d(list_of_lines, board, True)
+
+	if dims[1]>80:
+		# pokud je šířka více než 80 (délka řádku konzole), nemá smysl vypisovat na konzoli
+		board2d_to_file('output2-'+fn, board)
+	else:
+		dump_board2d(board)
+		board2d_to_file('output2-'+fn, board)
+	
+	answer = count_crossings(board, 2)
 	
 	print("Answer2 =", answer)
 
 def main(args):
 	
-	solve_part_1()
+	#~ solve_part_1()
 	
-	#~ solve_part_2()
+	solve_part_2()
 	
 	return 0
 
