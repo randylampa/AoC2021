@@ -7,23 +7,35 @@ import sys
 sys.path.append('..')
 import utils
 
+ISSUE=0
+
 def solve_part_1():
-	fn = 'input' if False else 'input-demo'
-	inpList = utils.read_file_into_list(fn)
-	print(inpList)
+	demo = 1
+
+	fn = utils.get_input_file(demo, ISSUE);
+	print(fn)
+	"""Do something here >>>"""
 
 	print('Part 1 not solved yet')
 	
 	answer = None
-	
-	print("Answer1 =", answer)
+
+	"""<<< Do something here"""
+	utils.print_answer(1, demo, answer)
 
 def solve_part_2():
+	demo = 1
+
+	fn = utils.get_input_file(demo, ISSUE);
+	print(fn)
+	"""Do something here >>>"""
+
 	print('Part 2 not solved yet')
 	
 	answer = None
-	
-	print("Answer2 =", answer)
+
+	"""<<< Do something here"""
+	utils.print_answer(2, demo, answer)
 
 def main(args):
 	
