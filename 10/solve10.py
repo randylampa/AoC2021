@@ -9,6 +9,14 @@ import utils
 
 ISSUE=10
 
+pair = [('(',')'), ('[',']'), ('{','}'), ('<','>')]
+
+"""
+hint:
+hledej aktuálni znak v otevíracích. když ano, dej na stack. (stack.append(x))
+pokud je zavírací a je stejný jak otevírací na stacku, odeber ze stacku (stack.pop()), pokud je jiný, je to chyba a zaloguj ji.
+"""
+
 def solve_part_1():
 	demo = 1
 
